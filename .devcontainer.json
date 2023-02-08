@@ -1,0 +1,11 @@
+{
+  "build": { "dockerfile": "Dockerfile" },
+
+  "customizations": {
+    "vscode": {
+      "extensions": [ "ms-vscode.cpptools-extension-pack", "twxs.cmake", "josetr.cmake-language-support-vscode",
+        "ms-vscode.cmake-tools"
+      ]
+    }
+  }
+}
