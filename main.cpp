@@ -1,4 +1,3 @@
-// NOLINT(legal/copyright)
 #include <iostream>
 
 int main() {
