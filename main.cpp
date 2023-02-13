@@ -1,18 +1,9 @@
 #include <iostream>
 
-#include "ev3dev-lang-cpp/ev3dev.h"
-
+#include "ev3dev.h"
 #include "motor.h"
 
-namespace core {
-
 using namespace motion;
-using ev3dev::large_motor;
-using ev3dev::address_type;
-
-}  // namespace core
-
-using namespace core;
 
 int main() {
   // Main control loop here
