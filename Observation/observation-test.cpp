@@ -8,8 +8,11 @@
 using namespace observation;
 
 int main() {
-  Log("Starting observation test????", "123", " ok this works\n");
+  Log("Starting observation test\n");
+  auto us_sensor = USSensorWrapper{ev3dev::OUTPUT_D, ev3dev::INPUT_1};
   // TODO: Test multiscan later on...
-  std::cout << std::endl;
+  while (true) {
+    Log("Reading: ", us_sensor.scan(), ".\n");
+  }
   return 0;
 }
