@@ -13,7 +13,7 @@ USSensorWrapper::USSensorWrapper(ev3dev::address_type us_motor_add, ev3dev::addr
 
 float USSensorWrapper::scan() {
   auto reading = us_sensor->distance_centimeters();
-  return 0;
+  return reading;
 }
 
 void USSensorWrapper::rotate() {

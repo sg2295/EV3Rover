@@ -16,11 +16,12 @@ add_compile_options("-static")
 add_library(ev3dev ev3dev-lang-cpp/ev3dev.cpp)
 target_include_directories(ev3dev PUBLIC ev3dev-lang-cpp/)
 
+add_subdirectory(Report)
 add_subdirectory(Motion)
 add_subdirectory(Observation)
 
 add_executable(ev3slam main.cpp)
-target_link_libraries(ev3slam PRIVATE "/usr/arm-linux-gnueabi/" ev3dev motion observation)
+target_link_libraries(ev3slam PRIVATE "/usr/arm-linux-gnueabi/" ev3dev motion observation report)
 # TODO: Can remove /usr/arm...
 
 # add_executable(example-lib-run main.cpp)
