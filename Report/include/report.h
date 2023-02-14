@@ -2,8 +2,9 @@
 
 namespace report {
 // TODO: Detect if logging is on, otherwise turn it off...
-#define Log(...) do { report::_log_message(std::cout, __VA_ARGS__); } while(0);
+#define Log(...) do { report::_log_message(std::cout, __VA_ARGS__); } while(0)
 // TODO: Add Error and Warn here...
+#define Assert(exp, ...) do { if (!(exp)) { report::_log_message(std::cout, __VA_ARGS__, " in ", __FILE__, ":", __LINE__, '\n'); std::exit(1); } } while (0)
 
 
 // N.B. Implementation details - use the above macros, NOT the below functions!
