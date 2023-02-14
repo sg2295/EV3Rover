@@ -1,7 +1,8 @@
 #include <iostream>
 
 #include "ev3dev.h"
-#include "motor.h"
+#include "motion.h"
+// #include "observation.h"
 
 using namespace motion;
 

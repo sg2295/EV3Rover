@@ -1,7 +1,9 @@
+#include <memory>
+
 #include <chrono>
 #include <thread>
 
-#include "motor.h"
+#include "motion.h"
 #include "ev3dev.h"
 
 namespace motion {
@@ -14,8 +16,8 @@ MotorsWrapper::MotorsWrapper(ev3dev::address_type l_add, ev3dev::address_type r_
 void MotorsWrapper::drive(Direction dir) {
   unsigned constexpr mov_dur_ms = 1000;
   int const speed = (dir != Direction::S) ? 500 : -500;
-  l_motor->set_speed_sp((dir != NW) ? speed : (speed * 0.50)).set_time_sp(mov_dur_ms).run_timed();
-  r_motor->set_speed_sp((dir != NE) ? speed : (speed * 0.50)).set_time_sp(mov_dur_ms).run_timed();
+  l_motor->set_speed_sp((dir != Direction::NW) ? speed : (speed * 0.50)).set_time_sp(mov_dur_ms).run_timed();
+  r_motor->set_speed_sp((dir != Direction::NE) ? speed : (speed * 0.50)).set_time_sp(mov_dur_ms).run_timed();
   // TODO: Is the below needed?
   while (l_motor->state().count("running") || r_motor->state().count("running"))
     std::this_thread::sleep_for(std::chrono::milliseconds(10));
