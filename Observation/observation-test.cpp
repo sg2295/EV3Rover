@@ -12,16 +12,11 @@ int main() {
   //   std::cout << "pos=" << us_sensor.motor->position() << std::endl;
   // }
   // Test static sensing...
-  auto sensor_readings = us_sensor.scan();
-  for (auto i : sensor_readings)
-    std::cout << i << ", ";
-  std::cout << std::endl;
-  int x = 0;
-  std::cin >> x;
-  std::cout << std::endl;
-  sensor_readings = us_sensor.scan();
-  for (auto i : sensor_readings)
-    std::cout << i << ", ";
-  std::cout << std::endl;
+  for (unsigned j = 0; j < 15; ++j) {
+    auto sensor_readings = us_sensor.scan();
+    for (auto i : sensor_readings)
+      std::cout << '[' << i << "], ";
+    std::cout << std::endl;
+  }
   return 0;
 }

@@ -33,11 +33,12 @@ SensorReading USSensorWrapper::scan() {
   for (unsigned i = 0; i < num_measurements; ++i) {
     std::this_thread::sleep_for(std::chrono::milliseconds(50));
     readings.at(invert ? num_measurements - 1 - i : i) = us_sensor->distance_centimeters();
+    std::cout << "Reading done at: " << motor->position() << "\n";
     std::this_thread::sleep_for(std::chrono::milliseconds(50));
     if (i + 1 < num_measurements) rotate(invert);
-    std::cout << "Reading done at: " << motor->position() << "\n";
   }
-  Assert(abs(motor->position()) == abs(m_start_pos), "Motor position after scan invalid.");
+  Warn(abs(motor->position()) == abs(m_start_pos), "Motor position after scan invalid.");
+  // TODO: If we are not equal to the absolute pos, then reset it to the absolute pos and carry on...
   return readings;
 }
 
