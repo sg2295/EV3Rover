@@ -25,6 +25,8 @@ USSensorWrapper::USSensorWrapper(ev3dev::address_type us_motor_add, ev3dev::addr
   Assert(motor->position() == m_start_pos, "Motor position invalid in ctor.");
 }
 
+USSensorWrapper::~USSensorWrapper() = default;
+
 float USSensorWrapper::bearing_reading() {
   // Gets an average for the readings...
   // TODO: Is there a better way to deal with inf? Should we discard them?

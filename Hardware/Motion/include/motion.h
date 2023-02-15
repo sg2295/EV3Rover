@@ -4,8 +4,8 @@
 #include <memory>
 
 namespace ev3dev {
-  class large_motor;
-  using address_type = std::string;  // TODO: Should this be a typedef instead?
+class large_motor;
+using address_type = std::string;
 }  // namespace ev3dev
 
 namespace motion {
@@ -17,7 +17,7 @@ enum Direction {
 class MotorsWrapper {
  public:
   MotorsWrapper(ev3dev::address_type l_add, ev3dev::address_type r_add);
-
+  ~MotorsWrapper();
   void drive(Direction dir);
 
   unsigned odometry();  // TODO: Get odometry from wheel encoders...

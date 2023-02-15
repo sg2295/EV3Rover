@@ -9,7 +9,7 @@ using namespace observation;
 
 int main() {
   Log("Starting observation test\n");
-  auto us_sensor = USSensorWrapper{ev3dev::OUTPUT_C, ev3dev::INPUT_1};
+  USSensorWrapper us_sensor{ev3dev::OUTPUT_C, ev3dev::INPUT_1};
   // while (true) {
   //   std::cout << "pos=" << us_sensor.motor->position() << std::endl;
   // }

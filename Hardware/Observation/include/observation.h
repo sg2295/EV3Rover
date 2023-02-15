@@ -5,9 +5,9 @@
 #include <array>
 
 namespace ev3dev {
-  class medium_motor;
-  class ultrasonic_sensor;
-  using address_type = std::string;
+class medium_motor;
+class ultrasonic_sensor;
+using address_type = std::string;
 }  // namespace ev3dev
 
 namespace observation {
@@ -15,6 +15,7 @@ namespace observation {
 class USSensorWrapper {
  public:
   USSensorWrapper(ev3dev::address_type us_motor_add, ev3dev::address_type us_sensor_add);
+  ~USSensorWrapper();
   static size_t constexpr num_measurements = 13;  // 0..180 (a measurement every 15 degrees)
   std::array<float, num_measurements> scan();
 
