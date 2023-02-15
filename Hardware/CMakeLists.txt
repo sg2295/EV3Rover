@@ -1,5 +1,6 @@
-
-# TODO: Add hardware-scope library
+# TODO: What is the best way to use the include-scope?
+add_library(hardware-scope INTERFACE)
+target_include_directories(hardware-scope INTERFACE include-scope)
 
 add_subdirectory(Motion)
 add_subdirectory(Observation)

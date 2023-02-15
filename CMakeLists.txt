@@ -19,6 +19,7 @@ add_subdirectory(Report)
 add_subdirectory(Hardware)
 
 add_executable(ev3slam main.cpp)
+# TODO: This should use hardware, not motion & observation
 target_link_libraries(ev3slam PRIVATE ev3dev motion observation report)
 
 # TODO: What is the correct way to set CMake up for main running files?...
