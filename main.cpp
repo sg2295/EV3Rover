@@ -4,6 +4,9 @@
 #include "motion.h"
 // #include "observation.h"
 
+// TODO: Can move motion and observation into 'ev3-hw' and add include scope
+//       Then we collect all fwd declares of ev3dev in a single header (minor improvement)
+
 using namespace motion;
 
 int main() {

@@ -18,7 +18,6 @@ void MotorsWrapper::drive(Direction dir) {
   int const speed = (dir != Direction::S) ? 500 : -500;
   l_motor->set_speed_sp((dir != Direction::NW) ? speed : (speed * 0.50)).set_time_sp(mov_dur_ms).run_timed();
   r_motor->set_speed_sp((dir != Direction::NE) ? speed : (speed * 0.50)).set_time_sp(mov_dur_ms).run_timed();
-  // TODO: Is the below needed?
   while (l_motor->state().count("running") || r_motor->state().count("running"))
     std::this_thread::sleep_for(std::chrono::milliseconds(10));
 }
