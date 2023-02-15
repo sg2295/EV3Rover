@@ -1,3 +1,6 @@
+#ifndef _MOTION_INCLUDE_MOTION_H_
+#define _MOTION_INCLUDE_MOTION_H_
+
 #include <memory>
 
 namespace ev3dev {
@@ -22,6 +25,11 @@ class MotorsWrapper {
  private:
   std::unique_ptr<ev3dev::large_motor> l_motor;
   std::unique_ptr<ev3dev::large_motor> r_motor;
+  static unsigned constexpr mov_dur_ms = 1000;
+  static unsigned constexpr dflt_speed = 500;
+  static float constexpr turn_s_dec = 0.5;  // % amount by which speed is reduced for a turn...
 };
 
 }  // namespace motion
+
+#endif  // _MOTION_INCLUDE_MOTION_H_
