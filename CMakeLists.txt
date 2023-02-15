@@ -21,6 +21,10 @@ add_subdirectory(Observation)
 
 add_executable(ev3slam main.cpp)
 target_link_libraries(ev3slam PRIVATE ev3dev motion observation report)
+
+# TODO: What is the correct way to set CMake up for main running files?...
+# add_executable(ev3slam-test $<TARGET_OBJECTS:ev3slam>)
+
 # TODO: Why `/usr/arm-linux-gnueabi/`?
 
 # Need to write in terminal (added to Dockerfile...):
