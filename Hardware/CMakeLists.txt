@@ -10,4 +10,4 @@ target_link_libraries(hardware PRIVATE hardware-scope ev3dev report motion obser
 
 add_executable(hardware-test hardware-test.cpp)
 target_include_directories(hardware-test PRIVATE include)
-target_link_libraries(hardware-test PRIVATE ev3dev hardware report)
+target_link_libraries(hardware-test PRIVATE hardware-scope ev3dev hardware report)

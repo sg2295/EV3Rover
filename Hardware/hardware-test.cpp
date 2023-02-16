@@ -1,3 +1,5 @@
+#include <iostream>
+
 #include "hardware.h"
 
 #include "ev3dev.h"
@@ -6,7 +8,6 @@
 using namespace hardware;
 
 int main() {
-  Log("Hardware test...\n");
   // TODO: Can move below into a motion test...
   // Main control loop here
   // auto motors = MotorsWrapper{ev3dev::OUTPUT_D, ev3dev::OUTPUT_A};
@@ -18,7 +19,19 @@ int main() {
   //   std::cout << std::endl;
   //   motors.drive(static_cast<Direction>(mc));
   // }
-
+  Log("Hardware test...\n");
   EV3 ev3{ev3dev::OUTPUT_D, ev3dev::OUTPUT_A, ev3dev::OUTPUT_C, ev3dev::INPUT_1};
+  unsigned c = 0;
+  while (true) {
+    Log("Motion command: ");
+    std::cin >> c;
+    Log('\n');
+    auto s = ev3(static_cast<Direction>(c));
+    Log("Odometry: ", s.odometry.first, ", ", s.odometry.second, "\n");
+    Log("Sensing: ");
+    for (float f : s.observation)
+      Log(f, " ");
+    Log('\n');
+  }
   return 0;
 }
