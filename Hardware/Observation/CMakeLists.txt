@@ -1,4 +1,4 @@
-add_library(observation observation.cpp)
+add_library(observation STATIC observation.cpp)
 target_include_directories(observation PUBLIC include)
 target_link_libraries(observation PRIVATE ev3dev report hardware-scope)
 

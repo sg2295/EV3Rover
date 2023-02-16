@@ -10,7 +10,6 @@ set(CMAKE_CXX_STANDARD 14)  # Cannot use 17+...
 project(EV3_SLAM)
 add_compile_options(-static)
 add_compile_options(-Wall -Wextra -pedantic -Werror)
-add_compile_options(-std=c++1z)  # We want nested namespace definitions...
 
 # TODO: This project requires the ev3dev-lang-cpp library: https://github.com/ddemidov/ev3dev-lang-cpp.
 add_library(ev3dev ev3dev-lang-cpp/ev3dev.cpp)
