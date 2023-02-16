@@ -4,11 +4,7 @@
 #include <memory>
 #include <array>
 
-namespace ev3dev {
-class medium_motor;
-class ultrasonic_sensor;
-using address_type = std::string;
-}  // namespace ev3dev
+#include "hardware-scope.h"
 
 namespace observation {
 

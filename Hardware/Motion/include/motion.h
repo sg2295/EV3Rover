@@ -3,10 +3,7 @@
 
 #include <memory>
 
-namespace ev3dev {
-class large_motor;
-using address_type = std::string;
-}  // namespace ev3dev
+#include "hardware-scope.h"
 
 namespace motion {
 

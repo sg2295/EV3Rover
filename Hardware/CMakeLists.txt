@@ -1,4 +1,3 @@
-# TODO: What is the best way to use the include-scope?
 add_library(hardware-scope INTERFACE)
 target_include_directories(hardware-scope INTERFACE include-scope)
 
@@ -7,7 +6,7 @@ add_subdirectory(Observation)
 
 add_library(hardware hardware.cpp)
 target_include_directories(hardware PUBLIC include)
-target_link_libraries(hardware PRIVATE ev3dev report motion observation)
+target_link_libraries(hardware PRIVATE ev3dev report motion observation)  # TODO: Do we need the inc. scope here?
 
 add_executable(hardware-test hardware-test.cpp)
 target_include_directories(hardware-test PRIVATE include)
