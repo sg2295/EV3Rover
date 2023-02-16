@@ -6,7 +6,7 @@ add_subdirectory(Observation)
 
 add_library(hardware hardware.cpp)
 target_include_directories(hardware PUBLIC include)
-target_link_libraries(hardware PRIVATE ev3dev report motion observation)  # TODO: Do we need the inc. scope here?
+target_link_libraries(hardware PRIVATE hardware-scope ev3dev report motion observation)
 
 add_executable(hardware-test hardware-test.cpp)
 target_include_directories(hardware-test PRIVATE include)
