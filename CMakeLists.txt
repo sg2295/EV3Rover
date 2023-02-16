@@ -11,7 +11,7 @@ project(EV3_SLAM)
 add_compile_options(-static)
 add_compile_options(-Wall -Wextra -pedantic -Werror)
 
-# TODO: This project requires the ev3dev-lang-cpp library: https://github.com/ddemidov/ev3dev-lang-cpp.
+# N.B. This project requires the ev3dev-lang-cpp library: https://github.com/ddemidov/ev3dev-lang-cpp.
 add_library(ev3dev ev3dev-lang-cpp/ev3dev.cpp)
 target_include_directories(ev3dev PUBLIC ev3dev-lang-cpp/)
 
@@ -19,11 +19,7 @@ add_subdirectory(Report)
 add_subdirectory(Hardware)
 
 add_executable(ev3slam main.cpp)
-# TODO: This should use hardware, not motion & observation
-target_link_libraries(ev3slam PRIVATE ev3dev hardware report)
-
-# TODO: What is the correct way to set CMake up for main running files?...
-# add_executable(ev3slam-test $<TARGET_OBJECTS:ev3slam>)
+target_link_libraries(ev3slam PRIVATE ev3dev hardware-scope hardware report)
 
 # TODO: Why `/usr/arm-linux-gnueabi/`?
 

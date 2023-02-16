@@ -25,6 +25,12 @@ enum HardwareConstants {
   SENSOR_FOV = 180,  // Field of view for a single scan (in degrees)
 };
 
+struct Pose {
+  int x;
+  int y;
+  int theta;
+};
+
 }  // namespace hardware
 
 #endif  // _HARDWARE_INCLUDE_SCOPE_H_

@@ -30,9 +30,9 @@ void MotorsWrapper::drive(Direction dir) {
     std::this_thread::sleep_for(std::chrono::milliseconds(10));
 }
 
-std::pair<int, int> MotorsWrapper::odometry() {
+Pose MotorsWrapper::odometry() {
   // TODO: Get odometry from wheel encoders...
-  return std::make_pair<int, int>(0, 0);
+  return Pose{};
 }
 
 }  // namespace motion

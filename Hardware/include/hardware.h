@@ -23,11 +23,11 @@ namespace hardware {
 
 struct Sensing {
   Sensing() = default;
-  Sensing(std::array<float, HardwareConstants::NUM_READINGS> obs, std::pair<int, int> odmtr) :
+  Sensing(std::array<float, HardwareConstants::NUM_READINGS> obs, Pose odmtr) :
     observation{obs}, odometry{odmtr} {}
 
   std::array<float, HardwareConstants::NUM_READINGS> observation;
-  std::pair<int, int> odometry;
+  Pose odometry;
 };
 
 class EV3 {

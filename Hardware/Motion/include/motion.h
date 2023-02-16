@@ -9,6 +9,7 @@
 namespace motion {
 
 using hardware::Direction;
+using hardware::Pose;
 
 class MotorsWrapper {
  public:
@@ -16,7 +17,7 @@ class MotorsWrapper {
   ~MotorsWrapper();
   void drive(Direction dir);
 
-  std::pair<int, int> odometry();  // TODO: Get odometry from wheel encoders...
+  Pose odometry();
 
  private:
   std::unique_ptr<ev3dev::large_motor> l_motor;

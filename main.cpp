@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "hardware"
+#include "hardware.h"
 
 int main() {
   // TODO: test hardware...
