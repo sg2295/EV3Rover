@@ -17,4 +17,11 @@ EV3::EV3(ev3dev::address_type l_motor_add, ev3dev::address_type r_motor_add,
 
 EV3::~EV3() = default;
 
+Sensing EV3::operator()(Direction d) {
+  if (d != Direction::X) {
+    motors->drive(d);
+  }
+  return Sensing{us_sensor->scan(), motors->odometry()};
+}
+
 }  // namespace hardware

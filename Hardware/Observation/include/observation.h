@@ -12,10 +12,10 @@ class USSensorWrapper {
  public:
   USSensorWrapper(ev3dev::address_type us_motor_add, ev3dev::address_type us_sensor_add);
   ~USSensorWrapper();
-  static size_t constexpr num_measurements = 13;  // 0..180 (a measurement every 15 degrees)
+  static size_t constexpr num_measurements = hardware::HardwareConstants::NUM_READINGS;
   std::array<float, num_measurements> scan();
 
- private:  // TODO: Make private again!!!
+ private:
   float bearing_reading();
   void rotate(bool invert);
   static int constexpr m_speed = 75;
