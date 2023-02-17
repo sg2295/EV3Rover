@@ -27,10 +27,10 @@ int main() {
     std::cin >> c;
     Log('\n');
     auto s = ev3(static_cast<Direction>(c));
-    Log("Odometry: x=", s.odometry.x, ", y=", s.odometry.y, ", theta=", s.odometry.theta, "\n");
+    Log("Odometry: x=", s.odometry.x, ", y=", s.odometry.y, ", theta=", s.odometry.theta, '\n');
     Log("Sensing: ");
     for (float f : s.observation)
-      Log(f, " ");
+      Log(f, ' ');
     Log('\n');
   }
   return 0;

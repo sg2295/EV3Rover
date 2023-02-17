@@ -17,13 +17,16 @@ class MotorsWrapper {
   ~MotorsWrapper();
   void drive(Direction dir);
 
-  Pose odometry();
+  Pose odometry() const;
 
  private:
+  void update_pose(int l_speed, int r_speed);
+
   std::unique_ptr<ev3dev::large_motor> l_motor;
   std::unique_ptr<ev3dev::large_motor> r_motor;
+  Pose pose;
   static unsigned constexpr mov_dur_ms = 1000;
-  static unsigned constexpr dflt_speed = 500;
+  static unsigned constexpr dflt_speed = 360;
   static float constexpr turn_s_dec = 0.5;  // % amount by which speed is reduced for a turn...
 };
 

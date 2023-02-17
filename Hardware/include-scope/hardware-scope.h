@@ -28,7 +28,7 @@ enum HardwareConstants {
 struct Pose {
   int x;
   int y;
-  int theta;
+  float theta;
 };
 
 }  // namespace hardware
