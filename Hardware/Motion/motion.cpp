@@ -34,25 +34,33 @@ void MotorsWrapper::drive(Direction dir) {
 }
 
 void MotorsWrapper::update_pose(int l_speed, int r_speed) {
-  // TODO: Complete update pose function.
-  // We can use `mov_dur_ms`
   // count_per_m();  // Tacho counts per meter of travel.
   // full_travel_count();  // Total number of tacho counts. Combine with count_per_m() to get total meters travelled.
   float constexpr wheel_circ = 17.59;  // in cm
-  float constexpr distance_between_motors = 15.4;
-  float const dl = wheel_circ * l_speed / dflt_speed;
-  float const dr = wheel_circ * r_speed / dflt_speed;
-  float d = (dl + dr) / 2;
-  float delta_theta = (dr - dl) / distance_between_motors;
-  float new_theta = pose.theta + delta_theta;
-  float constexpr pi = 3.14;
-  // If new_theta
-  float new_x = (new_theta < pi / 2 && new_theta > 3 * pi / 2) ? pose.x + d * std::cos(pose.theta) : pose.x - d * std::cos(pose.theta);
-  float new_y = (new_theta < pi && new_theta > 0) ? pose.y + d * std::sin(pose.theta) : pose.y - d * std::sin(pose.theta);
-  auto new_pose = Pose{static_cast<int>(new_x), static_cast<int>(new_y), new_theta};
-  // auto new_pose = Pose{
-  //   static_cast<int>(pose.x + d * std::cos(pose.theta)), static_cast<int>(pose.y + d * std::sin(pose.theta)),
-  //   new_theta};
+  float constexpr distance_between_motors = 18.2;  // From center of the wheels  // Calculating from inner wheel bound = 15.4
+  static_assert(mov_dur_ms == 1000, "Movement time has changed. Below needs to be generalized...");
+  // Linear velocities:
+  float const vl = wheel_circ * l_speed / dflt_speed;
+  float const vr = wheel_circ * r_speed / dflt_speed;
+  // FIXME: Need to rework below if `mov_dur_ms` changes...
+  // * move_dur_ms / 1000;  // (convert to seconds)
+  auto new_pose = Pose{};
+  if (vr == vl) {
+    new_pose.x = static_cast<int>(pose.x + vr * std::cos(pose.theta));
+    new_pose.y = static_cast<int>(pose.y + vr * std::sin(pose.theta));
+    new_pose.theta = pose.theta;
+  } else {
+    float const R = (distance_between_motors / 2) * ((vr + vl) / (vr - vl));
+    float const omega = (vr - vl) / distance_between_motors;  // Angular velocity
+    // https://www.cs.columbia.edu/~allen/F17/NOTES/icckinematics.pdf
+    // https://www.cs.bham.ac.uk/internal/courses/int-robot/2014/lectures/14-ir-kinematics.pdf
+    float const icc_x = pose.x - R * std::sin(pose.theta);
+    float const icc_y = pose.y + R * std::cos(pose.theta);
+    Log("R=", R, " omega=", omega, "\nicc_x=", icc_x, " icc_y=", icc_y, "\n");
+    new_pose.x = static_cast<int>((std::cos(omega) * (pose.x - icc_x)) - (std::sin(omega) * (pose.y - icc_y)) + icc_x);
+    new_pose.y = static_cast<int>((std::sin(omega) * (pose.x - icc_x)) + (std::cos(omega) * (pose.y - icc_y)) + icc_y);
+    new_pose.theta = pose.theta + omega;
+  }
   pose = new_pose;
 }
 
