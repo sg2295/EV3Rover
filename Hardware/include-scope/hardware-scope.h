@@ -26,8 +26,8 @@ enum HardwareConstants {
 };
 
 struct Pose {
-  int x;
-  int y;
+  float x;
+  float y;
   float theta;
 };
 

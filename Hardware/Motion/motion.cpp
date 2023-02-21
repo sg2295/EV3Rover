@@ -46,8 +46,8 @@ void MotorsWrapper::update_pose(int l_speed, int r_speed) {
   // * move_dur_ms / 1000;  // (convert to seconds)
   auto new_pose = Pose{};
   if (vr == vl) {
-    new_pose.x = static_cast<int>(pose.x + vr * std::cos(pose.theta));
-    new_pose.y = static_cast<int>(pose.y + vr * std::sin(pose.theta));
+    new_pose.x = pose.x + vr * std::cos(pose.theta);
+    new_pose.y = pose.y + vr * std::sin(pose.theta);
     new_pose.theta = pose.theta;
   } else {
     float const R = (distance_between_motors / 2) * ((vr + vl) / (vr - vl));
@@ -57,8 +57,8 @@ void MotorsWrapper::update_pose(int l_speed, int r_speed) {
     float const icc_x = pose.x - R * std::sin(pose.theta);
     float const icc_y = pose.y + R * std::cos(pose.theta);
     Log("R=", R, " omega=", omega, "\nicc_x=", icc_x, " icc_y=", icc_y, "\n");
-    new_pose.x = static_cast<int>((std::cos(omega) * (pose.x - icc_x)) - (std::sin(omega) * (pose.y - icc_y)) + icc_x);
-    new_pose.y = static_cast<int>((std::sin(omega) * (pose.x - icc_x)) + (std::cos(omega) * (pose.y - icc_y)) + icc_y);
+    new_pose.x = (std::cos(omega) * (pose.x - icc_x)) - (std::sin(omega) * (pose.y - icc_y)) + icc_x;
+    new_pose.y = (std::sin(omega) * (pose.x - icc_x)) + (std::cos(omega) * (pose.y - icc_y)) + icc_y;
     new_pose.theta = pose.theta + omega;
   }
   pose = new_pose;
