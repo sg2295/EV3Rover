@@ -52,6 +52,7 @@ void MotorsWrapper::update_pose(int l_speed, int r_speed) {
   } else {
     float const R = (distance_between_motors / 2) * ((vr + vl) / (vr - vl));
     float const omega = (vr - vl) / distance_between_motors;  // Angular velocity
+    // TODO: Could potentially unroll the below to acquire the dx & dy (solve for pose.x/y)
     // https://www.cs.columbia.edu/~allen/F17/NOTES/icckinematics.pdf
     // https://www.cs.bham.ac.uk/internal/courses/int-robot/2014/lectures/14-ir-kinematics.pdf
     float const icc_x = pose.x - R * std::sin(pose.theta);

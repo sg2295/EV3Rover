@@ -17,6 +17,7 @@ target_include_directories(ev3dev PUBLIC ev3dev-lang-cpp/)
 
 add_subdirectory(Report)
 add_subdirectory(Hardware)
+add_subdirectory(SparseGSLAM)
 
 add_executable(ev3slam main.cpp)
 target_link_libraries(ev3slam PRIVATE ev3dev hardware-scope hardware report)
