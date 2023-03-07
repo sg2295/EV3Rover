@@ -23,6 +23,7 @@ enum HardwareConstants {
   // TODO: Do we need motion constants? Speed, Turn speed reduction
   NUM_READINGS = 13,
   SENSOR_FOV = 180,  // Field of view for a single scan (in degrees)
+  NUM_MULTISCAN = 10,  // Number of consecutive sensor readings used to form a multiscan
 };
 
 struct Pose {

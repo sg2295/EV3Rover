@@ -4,6 +4,7 @@
 #include <memory>
 #include <array>
 #include <utility>
+#include <deque>
 
 #include "hardware-scope.h"
 
@@ -37,10 +38,12 @@ class EV3 {
   ~EV3();
 
   Sensing operator()(Direction d);
+  std::deque<Sensing> const& get_readings() const { return readings; }
 
  private:
   std::unique_ptr<observation::USSensorWrapper> us_sensor;
   std::unique_ptr<motion::MotorsWrapper> motors;
+  std::deque<Sensing> readings;
 };
 
 }  // namespace hardware
