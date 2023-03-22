@@ -11,6 +11,11 @@ project(EV3_SLAM)
 add_compile_options(-static)
 add_compile_options(-Wall -Wextra -pedantic -Werror)
 
+option(ENABLE_LOGGING "Enable logging. Disabled by default." OFF)
+if (ENABLE_LOGGING)
+add_definitions(-DENABLE_LOGGING)  # We don't have access to add_compile_definitons...
+endif()
+
 # N.B. This project requires the ev3dev-lang-cpp library: https://github.com/ddemidov/ev3dev-lang-cpp.
 add_library(ev3dev ev3dev-lang-cpp/ev3dev.cpp)
 target_include_directories(ev3dev PUBLIC ev3dev-lang-cpp/)
