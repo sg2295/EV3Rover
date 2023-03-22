@@ -11,7 +11,7 @@ project(EV3_SLAM)
 add_compile_options(-static)
 add_compile_options(-Wall -Wextra -pedantic -Werror)
 
-option(ENABLE_LOGGING "Enable logging. Disabled by default." OFF)
+option(ENABLE_LOGGING "Enable logging and user error reporting. On by default." ON)
 if (ENABLE_LOGGING)
 add_definitions(-DENABLE_LOGGING)  # We don't have access to add_compile_definitons...
 endif()
