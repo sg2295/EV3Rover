@@ -33,7 +33,7 @@ float USSensorWrapper::bearing_reading() {
   float bearing_reading = 0;
   for (unsigned i = 0; i < num_measurements_per_bearing; ++i) {
     bearing_reading += us_sensor->distance_centimeters();
-    std::this_thread::sleep_for(std::chrono::milliseconds(10));  // TODO: Do we need this?
+    std::this_thread::sleep_for(std::chrono::milliseconds(10));
   }
   return bearing_reading / num_measurements_per_bearing;
 }
@@ -42,27 +42,26 @@ SensorReading USSensorWrapper::scan() {
   auto readings = std::array<float, num_measurements>{};
   // To save power (& time) rotating sensor back to other side, we will do a sweep from whichever
   // side we left off. E.g. L->R and then R->L (see `invert` below).
-  // TODO: Check this optimization works...
-  // bool invert = motor->position() > 0;
-  // for (unsigned i = 0; i < num_measurements; ++i) {
-  //   std::this_thread::sleep_for(std::chrono::milliseconds(10));
-  //   readings.at(invert ? num_measurements - 1 - i : i) = bearing_reading();  // us_sensor->distance_centimeters();
-  //   // Log("Reading done at: ", motor->position(), "\n");
-  //   if (i + 1 < num_measurements) rotate(invert);
-  // }
-
-  // Reset motor to starting position
-  motor->set_position_sp(m_start_pos);
-  motor->set_speed_sp(m_speed).run_to_abs_pos();
-  while (motor->state().count("running"))
-    std::this_thread::sleep_for(std::chrono::milliseconds(10));
-  // Do scan
+  bool invert = motor->position() > 0;
   for (unsigned i = 0; i < num_measurements; ++i) {
-    readings.at(i) = bearing_reading();  // us_sensor->distance_centimeters();
+    readings.at(invert ? num_measurements - 1 - i : i) = bearing_reading();
     // Log("Reading done at: ", motor->position(), "\n");
-    if (i + 1 < num_measurements) rotate(false);
+    if (i + 1 < num_measurements) rotate(invert);
     std::this_thread::sleep_for(std::chrono::milliseconds(10));
   }
+  // Unoptimized scan() version:
+  // Reset motor to starting position
+  // motor->set_position_sp(m_start_pos);
+  // motor->set_speed_sp(m_speed).run_to_abs_pos();
+  // while (motor->state().count("running"))
+  //   std::this_thread::sleep_for(std::chrono::milliseconds(10));
+  // // Do scan
+  // for (unsigned i = 0; i < num_measurements; ++i) {
+  //   readings.at(i) = bearing_reading();  // us_sensor->distance_centimeters();
+  //   // Log("Reading done at: ", motor->position(), "\n");
+  //   if (i + 1 < num_measurements) rotate(false);
+  //   std::this_thread::sleep_for(std::chrono::milliseconds(10));
+  // }
   Warn(abs(motor->position()) == abs(m_start_pos), "Motor position after scan invalid.");
   return readings;
 }
