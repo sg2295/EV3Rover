@@ -8,7 +8,7 @@ namespace ev3dev {
 class large_motor;
 class medium_motor;
 class ultrasonic_sensor;
-using address_type = std::string;  // TODO: Should this be a typedef instead?
+using address_type = std::string;
 }  // namespace ev3dev
 
 namespace hardware {
@@ -20,10 +20,10 @@ enum Direction {
 };
 
 enum HardwareConstants {
-  // TODO: Do we need motion constants? Speed, Turn speed reduction
-  NUM_READINGS = 13,
+  // TODO: Do we need motion constants? Speed/Turn speed reduction
+  NUM_READINGS = 13,  // Number of positions we get a reading from
+  NUM_READINGS_PER_BEARING = 10,  // Number of sensor measurements per angle
   SENSOR_FOV = 180,  // Field of view for a single scan (in degrees)
-  NUM_MULTISCAN = 10,  // Number of consecutive sensor readings used to form a multiscan
 };
 
 struct Pose {
