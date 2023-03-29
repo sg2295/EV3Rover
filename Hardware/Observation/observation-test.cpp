@@ -22,14 +22,3 @@ int main() {
   }
   return 0;
 }
-
-
-
-// # TODO: add hardware-scope
-
-// add_subdirectory(Motion)
-// add_subdirectory(Observation)
-
-// add_library(hardware hardware.cpp)
-// target_include_directories(hardware PUBLIC include)
-// target_link_libraries(hardware PRIVATE report motion observation)

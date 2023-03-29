@@ -11,7 +11,6 @@ namespace observation {
 
 using MM = ev3dev::medium_motor;
 using USS = ev3dev::ultrasonic_sensor;
-// using BearingReading = std::array<float, USSensorWrapper::num_measurements>;
 
 USSensorWrapper::USSensorWrapper(ev3dev::address_type us_motor_add, ev3dev::address_type us_sensor_add) :
     motor{std::make_unique<MM>(us_motor_add)}, us_sensor{std::make_unique<USS>(us_sensor_add)} {
@@ -56,10 +55,10 @@ SensorReading USSensorWrapper::scan() {
   // while (motor->state().count("running"))
   //   std::this_thread::sleep_for(std::chrono::milliseconds(10));
   // // Do scan
-  // for (unsigned i = 0; i < num_measurements; ++i) {
+  // for (unsigned i = 0; i < readings.size(); ++i) {
   //   readings.at(i) = bearing_reading();  // us_sensor->distance_centimeters();
   //   // Log("Reading done at: ", motor->position(), "\n");
-  //   if (i + 1 < num_measurements) rotate(false);
+  //   if (i + 1 < readings.size()) rotate(false);
   //   std::this_thread::sleep_for(std::chrono::milliseconds(10));
   // }
   Warn(abs(motor->position()) == abs(m_start_pos), "Motor position after scan invalid.");

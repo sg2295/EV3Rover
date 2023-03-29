@@ -9,6 +9,8 @@
 namespace observation {
 
 using SensorReading = std::array<float, hardware::HardwareConstants::NUM_READINGS>;
+// TODO: Rework SensorReading to get raw data instead of processed data...
+// using BearingReading = std::array<float, USSensorWrapper::num_measurements>;
 
 class USSensorWrapper {
  public:
