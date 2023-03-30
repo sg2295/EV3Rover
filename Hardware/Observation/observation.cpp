@@ -26,15 +26,13 @@ USSensorWrapper::USSensorWrapper(ev3dev::address_type us_motor_add, ev3dev::addr
 
 USSensorWrapper::~USSensorWrapper() = default;
 
-float USSensorWrapper::bearing_reading() {  // TODO: Rework to return raw data - not the avg
-  // Gets an average for the readings...
-  // TODO: Is there a better way to deal with inf? Should we discard them?
-  float bearing_reading = 0;
-  for (unsigned i = 0; i < num_measurements_per_bearing; ++i) {
-    bearing_reading += us_sensor->distance_centimeters();
+BearingReading USSensorWrapper::bearing_reading() {
+  auto bearing_reading = BearingReading{};
+  for (unsigned i = 0; i < bearing_reading.size(); ++i) {
+    bearing_reading.at(i) = us_sensor->distance_centimeters();
     std::this_thread::sleep_for(std::chrono::milliseconds(10));
   }
-  return bearing_reading / num_measurements_per_bearing;
+  return bearing_reading;
 }
 
 SensorReading USSensorWrapper::scan() {
@@ -48,6 +46,7 @@ SensorReading USSensorWrapper::scan() {
     if (i + 1 < readings.size()) rotate(invert);
     std::this_thread::sleep_for(std::chrono::milliseconds(10));
   }
+  // TODO: Remove below before tapeout
   // Unoptimized scan() version:
   // Reset motor to starting position
   // motor->set_position_sp(m_start_pos);

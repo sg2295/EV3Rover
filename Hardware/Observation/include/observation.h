@@ -8,9 +8,8 @@
 
 namespace observation {
 
-using SensorReading = std::array<float, hardware::HardwareConstants::NUM_READINGS>;
-// TODO: Rework SensorReading to get raw data instead of processed data...
-// using BearingReading = std::array<float, USSensorWrapper::num_measurements>;
+using BearingReading = std::array<float, hardware::HardwareConstants::NUM_READINGS_PER_BEARING>;
+using SensorReading = std::array<BearingReading, hardware::HardwareConstants::NUM_READINGS>;
 
 class USSensorWrapper {
  public:
@@ -19,12 +18,11 @@ class USSensorWrapper {
   SensorReading scan();
 
  private:
-  float bearing_reading();
+  BearingReading bearing_reading();
   void rotate(bool invert);
   static int constexpr m_speed = 75;
   static int constexpr m_start_pos = -90;  // Initial starting position of sensor (degrees)
   static int constexpr m_pos_inc = 15;  // Degree increment during scan
-  static unsigned constexpr num_measurements_per_bearing = hardware::HardwareConstants::NUM_READINGS_PER_BEARING;
   std::unique_ptr<ev3dev::medium_motor> motor;
   std::unique_ptr<ev3dev::ultrasonic_sensor> us_sensor;
 };

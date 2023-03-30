@@ -32,6 +32,8 @@ struct Pose {
   float theta;
 };
 
+using Observations = std::array<std::array<float, HardwareConstants::NUM_READINGS_PER_BEARING>, HardwareConstants::NUM_READINGS>;
+
 }  // namespace hardware
 
 #endif  // _HARDWARE_INCLUDE_SCOPE_H_

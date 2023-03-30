@@ -57,7 +57,7 @@ void MotorsWrapper::update_pose(int l_speed, int r_speed) {
     // https://www.cs.bham.ac.uk/internal/courses/int-robot/2014/lectures/14-ir-kinematics.pdf
     float const icc_x = pose.x - R * std::sin(pose.theta);
     float const icc_y = pose.y + R * std::cos(pose.theta);
-    Log("R=", R, " omega=", omega, "\nicc_x=", icc_x, " icc_y=", icc_y, "\n");
+    // Log("R=", R, " omega=", omega, "\nicc_x=", icc_x, " icc_y=", icc_y, "\n");
     new_pose.x = (std::cos(omega) * (pose.x - icc_x)) - (std::sin(omega) * (pose.y - icc_y)) + icc_x;
     new_pose.y = (std::sin(omega) * (pose.x - icc_x)) + (std::cos(omega) * (pose.y - icc_y)) + icc_y;
     new_pose.theta = pose.theta + omega;

@@ -28,9 +28,13 @@ int main() {
     auto s = ev3(static_cast<Direction>(c));
     ofile << s;  // Save to file...
     Log("Odometry: x=", s.odometry.x, ", y=", s.odometry.y, ", theta=", s.odometry.theta, '\n');
-    Log("Sensing: ");
-    for (float f : s.observation)
-      Log(f, ' ');
+    Log("Sensing: \n");
+    for (auto const& bearing : s.observation) {
+      Log('\t');
+      for (float const f : bearing)
+        Log(f, ' ');
+      Log('\n');
+    }
     Log("\nMotion command: ");
     std::cin >> c;
     Log('\n');

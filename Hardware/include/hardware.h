@@ -25,18 +25,19 @@ namespace hardware {
 
 struct Sensing {
   Sensing() = default;
-  Sensing(std::array<float, HardwareConstants::NUM_READINGS> obs, Pose odmtr) :
-    observation{obs}, odometry{odmtr} {}
+  // TODO: Fix the below - need to restructure dependencies...
+  Sensing(Observations obs, Pose odmtr) : observation{obs}, odometry{odmtr} {}
 
-  std::array<float, HardwareConstants::NUM_READINGS> observation;
+  Observations observation;
   Pose odometry;
 
   friend std::ostream& operator<<(std::ostream& os, Sensing const& s) {
-    std::ignore = s;
-    // Format: [pose], [observation] -> x, y, theta s1 s2 [...] s9
+    // Format: [pose], [observation] -> x, y, theta obs1 obs2 [...] obs9
+    // Where obsN has M observations
     os << s.odometry.x << ' ' << s.odometry.y << ' ' << s.odometry.theta;
-    for (auto const obs : s.observation)
-      os << ' ' << obs;
+    for (auto const& bearing : s.observation)
+      for (auto const obs : bearing)
+        os << ' ' << obs;
     // TODO: Do we want to keep flushing after each line, or should we flush only in the end?
     //       (To avoid any overheads...)
     os << std::endl;
