@@ -44,6 +44,7 @@ SensorReading USSensorWrapper::scan() {
     readings.at(invert ? readings.size() - 1 - i : i) = bearing_reading();
     // Log("Reading done at: ", motor->position(), "\n");
     if (i + 1 < readings.size()) rotate(invert);
+    Warn(abs(motor->position()) % 15, "Motor position is not correct");
     std::this_thread::sleep_for(std::chrono::milliseconds(10));
   }
   // TODO: Remove below before tapeout
