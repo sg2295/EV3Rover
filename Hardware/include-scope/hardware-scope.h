@@ -22,7 +22,7 @@ enum Direction {
 enum HardwareConstants {
   // TODO: Do we need motion constants? Speed/Turn speed reduction
   NUM_READINGS = 13,  // Number of positions we get a reading from
-  NUM_READINGS_PER_BEARING = 10,  // Number of sensor measurements per angle
+  NUM_READINGS_PER_BEARING = 25,  // Number of sensor measurements per angle
   SENSOR_FOV = 180,  // Field of view for a single scan (in degrees)
 };
 
