@@ -25,7 +25,6 @@ namespace hardware {
 
 struct Sensing {
   Sensing() = default;
-  // TODO: Fix the below - need to restructure dependencies...
   Sensing(Observations obs, Pose odmtr) : observation{obs}, odometry{odmtr} {}
 
   Observations observation;
@@ -52,12 +51,10 @@ class EV3 {
   ~EV3();
 
   Sensing operator()(Direction d);
-  // std::deque<Sensing> const& get_readings() const { return readings; }
 
  private:
   std::unique_ptr<observation::USSensorWrapper> us_sensor;
   std::unique_ptr<motion::MotorsWrapper> motors;
-  // std::deque<Sensing> readings;  // We're saving to file instead...
 };
 
 }  // namespace hardware

@@ -26,7 +26,7 @@ class MotorsWrapper {
   std::unique_ptr<ev3dev::large_motor> r_motor;
   Pose pose;
   static unsigned constexpr mov_dur_ms = 1000;
-  static unsigned constexpr dflt_speed = 360;
+  static unsigned constexpr dflt_speed = 180;
   static float constexpr turn_s_dec = 0.5;  // % amount by which speed is reduced for a turn...
 };
 

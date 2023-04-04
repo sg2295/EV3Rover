@@ -39,17 +39,15 @@ void MotorsWrapper::update_pose(int l_speed, int r_speed) {
   float constexpr wheel_circ = 17.59;  // in cm
   float constexpr distance_between_motors = 18.2;  // From center of the wheels  // Calculating from inner wheel bound = 15.4
   static_assert(mov_dur_ms == 1000, "Movement time has changed. Below needs to be generalized...");
-  // Linear velocities:
-  float const vl = wheel_circ * l_speed / dflt_speed;
-  float const vr = wheel_circ * r_speed / dflt_speed;
-  // FIXME: Need to rework below if `mov_dur_ms` changes...
-  // * move_dur_ms / 1000;  // (convert to seconds)
+  // Linear velocities (convert wheel speeds from degrees to centimeters):
+  float const vl = wheel_circ * l_speed / 360;
+  float const vr = wheel_circ * r_speed / 360;
   auto new_pose = Pose{};
-  if (vr == vl) {
+  if (vr == vl) {  // Moving in a straight line
     new_pose.x = pose.x + vr * std::cos(pose.theta);
     new_pose.y = pose.y + vr * std::sin(pose.theta);
     new_pose.theta = pose.theta;
-  } else {
+  } else {  // Turning
     float const R = (distance_between_motors / 2) * ((vr + vl) / (vr - vl));
     float const omega = (vr - vl) / distance_between_motors;  // Angular velocity
     // TODO: Could potentially unroll the below to acquire the dx & dy (solve for pose.x/y)
