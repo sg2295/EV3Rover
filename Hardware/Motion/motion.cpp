@@ -15,8 +15,8 @@ using LM = ev3dev::large_motor;
 
 MotorsWrapper::MotorsWrapper(ev3dev::address_type l_add, ev3dev::address_type r_add) :
     l_motor{std::make_unique<LM>(l_add)}, r_motor{std::make_unique<LM>(r_add)}, pose{} {
-  Assert(r_motor->connected(), "Right motor not connected");
-  Assert(l_motor->connected(), "Left motor not connected");
+  Error(r_motor->connected(), "Right motor not connected");
+  Error(l_motor->connected(), "Left motor not connected");
 }
 
 MotorsWrapper::~MotorsWrapper() = default;
