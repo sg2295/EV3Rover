@@ -3,3 +3,4 @@ build
 .cache
 data/
 ev3dev-lang-cpp/
+compile_commands.json
