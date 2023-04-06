@@ -1,11 +1,10 @@
 #ifndef _HARDWARE_INCLUDE_HARDWARE_H_
 #define _HARDWARE_INCLUDE_HARDWARE_H_
 
-#include <memory>
 #include <array>
-#include <utility>
-#include <deque>
 #include <iostream>
+#include <memory>
+#include <utility>
 
 #include "hardware-scope.h"
 
