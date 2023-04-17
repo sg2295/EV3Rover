@@ -21,7 +21,7 @@ Sensing EV3::operator()(Direction d) {
   if (d != Direction::X) {
     motors->drive(d);
   }
-  return Sensing{us_sensor->scan(), motors->odometry()};
+  return Sensing{us_sensor->scan(), motors->cur_pose()};
 }
 
 }  // namespace hardware

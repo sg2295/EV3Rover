@@ -17,7 +17,7 @@ class MotorsWrapper {
   ~MotorsWrapper();
   void drive(Direction dir);
 
-  Pose odometry() const;
+  Pose cur_pose() const;
 
  private:
   void update_pose(int l_speed, int r_speed);

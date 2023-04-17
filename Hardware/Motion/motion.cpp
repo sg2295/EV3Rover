@@ -34,8 +34,6 @@ void MotorsWrapper::drive(Direction dir) {
 }
 
 void MotorsWrapper::update_pose(int l_speed, int r_speed) {
-  // count_per_m();  // Tacho counts per meter of travel.
-  // full_travel_count();  // Total number of tacho counts. Combine with count_per_m() to get total meters travelled.
   float constexpr wheel_circ = 17.59;  // in cm
   float constexpr distance_between_motors = 18.2;  // From center of the wheels  // Calculating from inner wheel bound = 15.4
   static_assert(mov_dur_ms == 1000, "Movement time has changed. Below needs to be generalized...");
@@ -63,7 +61,7 @@ void MotorsWrapper::update_pose(int l_speed, int r_speed) {
   pose = new_pose;
 }
 
-Pose MotorsWrapper::odometry() const {
+Pose MotorsWrapper::cur_pose() const {
   return pose;
 }
 
