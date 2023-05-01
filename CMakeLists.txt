@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.7.2)
 set(CMAKE_CXX_STANDARD 14)  # Cannot use 17 and above...
 # message("Compiling with c++${CMAKE_CXX_STANDARD}.")
 
-project(EV3_SLAM)  # TODO: Change name to something more sensible...
+project(EV3Rover)
 
 # Check that build type was provided. Otherwise default to Release.
 if (NOT CMAKE_BUILD_TYPE)
@@ -45,9 +45,3 @@ target_include_directories(ev3dev PUBLIC ev3dev-lang-cpp/)
 
 add_subdirectory(Report)
 add_subdirectory(Hardware)
-
-add_executable(ev3slam main.cpp)
-target_link_libraries(ev3slam PRIVATE ev3dev hardware-scope hardware report)
-
-# Need to write in terminal (added to Dockerfile...):
-# ` export QEMU_LD_PREFIX=/usr/arm-linux-gnueabi `
