@@ -33,5 +33,5 @@ It is recommended to do the above in a Docker image of the EV3DEV OS, instead of
 
 N.B. the design of EV3Rover is inherently modular and allows for the trivial swapping of both the motion and observation modules. If you choose to use a different vehicle or sensor configuration, you'll need to update the respective module(s) accordingly.
 
-### Why'd you make it?
+### Why did you make it?
 I created EV3Rover as part of my BSc Computer Science dissertation at the University of Bath. EV3Rover formed the basis of my research into the development of an any-time and any-space, sparse-sensing SLAM platform. It was used for environment exploration and data acquisition.
