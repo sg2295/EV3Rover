@@ -9,7 +9,9 @@ RUN sudo apt-get update -y ; \
 # RUN sudo apt-get install -y build-essential git
 # RUN sudo apt-get install -y git
 
-RUN echo 'export QEMU_LD_PREFIX=/usr/arm-linux-gnueabi' >> ~/.bashrc
+RUN echo 'export QEMU_LD_PREFIX=/usr/arm-linux-gnueabi' >> ~/.bashrc ; \
+    echo 'export CXX=/usr/bin/arm-linux-gnueabi-g++' >> ~/.bashrc ; \
+    echo 'export C=/usr/bin/arm-linux-gnueabi-gcc' >> ~/.bashrc
 
 RUN git clone https://github.com/ddemidov/ev3dev-lang-cpp.git ; \
     cd ev3dev-lang-cpp ; mkdir build ; cd build ; \
