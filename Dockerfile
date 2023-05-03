@@ -1,13 +1,10 @@
 FROM ev3dev/debian-stretch-cross
 
-# RUN apt-get install cmake make
 USER root
 
-# TODO: Can add --no-install-recommends to save more space...
+# Can add --no-install-recommends to save more space...
 RUN sudo apt-get update -y ; \
     sudo apt-get install -y build-essential git
-# RUN sudo apt-get install -y build-essential git
-# RUN sudo apt-get install -y git
 
 RUN echo 'export QEMU_LD_PREFIX=/usr/arm-linux-gnueabi' >> ~/.bashrc ; \
     echo 'export CXX=/usr/bin/arm-linux-gnueabi-g++' >> ~/.bashrc ; \
