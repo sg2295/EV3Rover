@@ -40,8 +40,11 @@ execute_process(COMMAND ${CMAKE_COMMAND} -E create_symlink ${CMAKE_CURRENT_BINAR
                                                            ${CMAKE_CURRENT_SOURCE_DIR}/compile_commands.json)
 
 # N.B. This project requires the ev3dev-lang-cpp library: https://github.com/ddemidov/ev3dev-lang-cpp.
-add_library(ev3dev ev3dev-lang-cpp/ev3dev.cpp)
-target_include_directories(ev3dev PUBLIC ev3dev-lang-cpp/)
+find_package(ev3dev REQUIRED)
+include_directories(/usr/local/include)
 
 add_subdirectory(Report)
 add_subdirectory(Hardware)
+
+add_executable(ev3rover main.cpp)
+target_link_libraries(ev3rover PRIVATE hardware-scope ev3dev hardware report)
