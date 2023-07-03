@@ -33,5 +33,8 @@ It is recommended to do the above in a Docker image of the EV3DEV OS, instead of
 
 N.B. the design of EV3Rover is inherently modular and allows for the trivial swapping of both the motion and observation modules. If you choose to use a different vehicle or sensor configuration, you'll need to update the respective module(s) accordingly.
 
+### Testing
+EV3Rover uses [googletest](https://github.com/google/googletest/tree/release-1.11.0) (gtest) for automated testing. Note that due to unsatisfied `CMake` requirements, we use the (now outdated) 1.11.0 release of `gtest`.
+
 ### Why did you make it?
 I created EV3Rover as part of my BSc Computer Science dissertation at the University of Bath. EV3Rover formed the basis of my research into the development of an any-time and any-space, sparse-sensing SLAM platform. It was used for environment exploration and data acquisition.
