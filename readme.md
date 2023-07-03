@@ -3,7 +3,7 @@ EV3Rover is a data acquisition module for an any-time and any-space, sparse-sens
 
 ### What hardware do I need to use EV3Rover?
 You need a LEGO Mindstorms EV3 robotics kit. Using the components found in this kit you'll need to consturct a non-holonomic, differential-drive vehicle. To aid with hardware assembly, the below LeoCAD images are provided:
-![Front-view CAD Design](images/ev3_cad_front.png) ![Back-view CAD Design](images/ev3_cad_back.png)
+![Front-view CAD Design](Images/ev3_cad_front.png) ![Back-view CAD Design](Images/ev3_cad_back.png)
 
 ### What about software?
 After constructing the hardware vehicle you'll need to install the EV3DEV Operating System onto your EV3 brick. Instructions on how to do this can be found on the [EV3DEV webiste](https://www.ev3dev.org/).
