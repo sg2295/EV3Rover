@@ -3,7 +3,8 @@ EV3Rover is a data acquisition module for an any-time and any-space, sparse-sens
 
 ### What hardware do I need to use EV3Rover?
 You need a LEGO Mindstorms EV3 robotics kit. Using the components found in this kit you'll need to consturct a non-holonomic, differential-drive vehicle. To aid with hardware assembly, the below LeoCAD images are provided:
-![Front-view CAD Design](Images/ev3_cad_front.png) ![Back-view CAD Design](Images/ev3_cad_back.png)
+![EV3 CAD Design](Images/ev3_leocad.png)
+<!-- ![Front-view CAD Design](Images/ev3_cad_front.png) ![Back-view CAD Design](Images/ev3_cad_back.png) -->
 
 ### What about software?
 After constructing the hardware vehicle you'll need to install the EV3DEV Operating System onto your EV3 brick. Instructions on how to do this can be found on the [EV3DEV webiste](https://www.ev3dev.org/).
@@ -33,8 +34,10 @@ It is recommended to do the above in a Docker image of the EV3DEV OS, instead of
 
 N.B. the design of EV3Rover is inherently modular and allows for the trivial swapping of both the motion and observation modules. If you choose to use a different vehicle or sensor configuration, you'll need to update the respective module(s) accordingly.
 
-### Testing
-EV3Rover uses [googletest](https://github.com/google/googletest/tree/release-1.11.0) (gtest) for automated testing. Note that due to unsatisfied `CMake` requirements, we use the (now outdated) 1.11.0 release of `gtest`.
+### But how do I know it works?
+EV3Rover uses [googletest](https://github.com/google/googletest/tree/release-1.11.0) for unit testing. Note that due to unsatisfied `CMake` requirements, we use the (now outdated) 1.11.0 release of `gtest`.
+
+In case of any problems, please feel free to get in touch with me using the email found on my github profile, or by opening a ticket on the EV3Rover repository!
 
 ### Why did you make it?
 I created EV3Rover as part of my BSc Computer Science dissertation at the University of Bath. EV3Rover formed the basis of my research into the development of an any-time and any-space, sparse-sensing SLAM platform. It was used for environment exploration and data acquisition.
