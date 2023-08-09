@@ -41,7 +41,6 @@ execute_process(COMMAND ${CMAKE_COMMAND} -E create_symlink ${CMAKE_CURRENT_BINAR
 
 # N.B. This project requires the ev3dev-lang-cpp library: https://github.com/ddemidov/ev3dev-lang-cpp.
 find_package(ev3dev REQUIRED)
-include_directories(/usr/local/include)
 
 add_subdirectory(Report)
 add_subdirectory(Hardware)
