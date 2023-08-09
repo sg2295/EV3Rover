@@ -5,8 +5,6 @@ set(CMAKE_CXX_STANDARD 14)  # Cannot use 17 and above...
 
 project(EV3Rover)
 
-add_subdirectory(External/googletest)
-
 # Check that build type was provided. Otherwise default to Release.
 if (NOT CMAKE_BUILD_TYPE)
   message(STATUS "Build type not specified, using `Release`.")
@@ -47,6 +45,9 @@ include_directories(/usr/local/include)
 
 add_subdirectory(Report)
 add_subdirectory(Hardware)
+
+add_subdirectory(External/googletest)
+add_subdirectory(Tests)
 
 add_executable(ev3rover main.cpp)
 target_link_libraries(ev3rover PRIVATE hardware-scope ev3dev hardware report)
