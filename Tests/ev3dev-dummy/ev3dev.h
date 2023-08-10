@@ -15,7 +15,13 @@ struct common {
   common(address_type addr) : addr{addr} {}
   // We assume output C is not connected
   // TODO: will need to add INPUT_C too for observation
-  bool connected() { return addr != OUTPUT_C; }
+  bool connected() const { return addr != OUTPUT_C; }
+
+  common& set_speed_sp(int speed) { (void) speed; return *this; }
+  common& set_time_sp(int time) { (void) time; return *this; }
+  common& run_timed() { return *this; }
+  common& state() { return *this; }
+  static bool count(std::string str) { (void) str; return false; }
 
   address_type addr{};
 };
@@ -28,8 +34,8 @@ struct large_motor : public common {
   large_motor(address_type address) : common{address} {}
 };
 
+// TODO: Add dummy versions for observation components
 struct medium_motor;
-
 
 }  // namespace ev3dev
 
