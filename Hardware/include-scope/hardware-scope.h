@@ -30,6 +30,10 @@ struct Pose {
   float x;
   float y;
   float theta;
+
+  bool operator==(const Pose& other) const {
+    return x == other.x && y == other.y && theta == other.theta;
+  }
 };
 
 using Observations = std::array<std::array<float, HardwareConstants::NUM_READINGS_PER_BEARING>, HardwareConstants::NUM_READINGS>;
