@@ -39,14 +39,18 @@ execute_process(COMMAND ${CMAKE_COMMAND} -E remove -f ${CMAKE_CURRENT_SOURCE_DIR
 execute_process(COMMAND ${CMAKE_COMMAND} -E create_symlink ${CMAKE_CURRENT_BINARY_DIR}/compile_commands.json
                                                            ${CMAKE_CURRENT_SOURCE_DIR}/compile_commands.json)
 
-# N.B. This project requires the ev3dev-lang-cpp library: https://github.com/ddemidov/ev3dev-lang-cpp.
-find_package(ev3dev REQUIRED)
+option(TESTS "Enable tests. Note this will include a dummy version of the EV3DEV library" OFF)
+if (NOT TESTS)
+  # N.B. This project requires the ev3dev-lang-cpp library: https://github.com/ddemidov/ev3dev-lang-cpp.
+  find_package(ev3dev REQUIRED)
+else ()
+  add_subdirectory(Tests)
+endif ()
 
 add_subdirectory(Report)
 add_subdirectory(Hardware)
 
 add_subdirectory(External/googletest)
-add_subdirectory(Tests)
 
 add_executable(ev3rover main.cpp)
 target_link_libraries(ev3rover PRIVATE hardware-scope ev3dev hardware report)
