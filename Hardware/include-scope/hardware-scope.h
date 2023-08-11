@@ -2,6 +2,7 @@
 #define _HARDWARE_INCLUDE_SCOPE_H_
 
 #include <string>
+#include <iostream>
 
 // Fwd declarations used by hardware modules
 namespace ev3dev {
@@ -33,6 +34,10 @@ struct Pose {
 
   bool operator==(const Pose& other) const {
     return x == other.x && y == other.y && theta == other.theta;
+  }
+  friend std::ostream& operator<<(std::ostream& os, Pose const& pose) {
+    os << pose.x << ' ' << pose.y << ' ' << pose.theta;
+    return os;
   }
 };
 

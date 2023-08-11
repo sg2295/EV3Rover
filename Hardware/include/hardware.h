@@ -31,9 +31,9 @@ struct Sensing {
 
   friend std::ostream& operator<<(std::ostream& os, Sensing const& s) {
     // Format: [pose], [observation] -> x, y, theta obs1 obs2 [...] obs9
-    // Where obsN has M observations
-    os << s.odometry.x << ' ' << s.odometry.y << ' ' << s.odometry.theta;
-    for (auto const& bearing : s.observation)
+    // Where obs has M observations
+    os << s.odometry;
+    for (auto const& bearing : s.observation)  // TODO: Move this into an overload<< for observation struct
       for (auto const obs : bearing)
         os << ' ' << obs;
     // TODO: Do we want to keep flushing after each line, or should we flush only in the end?
