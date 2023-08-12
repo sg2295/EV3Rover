@@ -33,12 +33,9 @@ struct Sensing {
     // Format: [pose], [observation] -> x, y, theta obs1 obs2 [...] obs9
     // Where obs has M observations
     os << s.odometry;
-    for (auto const& bearing : s.observation)  // TODO: Move this into an overload<< for observation struct
+    for (auto const& bearing : s.observation)
       for (auto const obs : bearing)
         os << ' ' << obs;
-    // TODO: Do we want to keep flushing after each line, or should we flush only in the end?
-    //       (To avoid any overheads...)
-    os << std::endl;
     return os;
   }
 };
