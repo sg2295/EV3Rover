@@ -7,8 +7,20 @@
 
 using namespace observation;
 
-// TODO: Add invalid connection tests + functionality for debugging
-// class USSensorConstructorTest : public ::testing::Test {};
+class USSensorConstructorTest : public ::testing::Test {
+ public:
+  USSensorConstructorTest() {
+    ::testing::FLAGS_gtest_death_test_style = "threadsafe";
+  }
+};
+
+TEST_F(USSensorConstructorTest, InvalidInput) {
+  EXPECT_DEATH(USSensorWrapper(ev3dev::OUTPUT_A, ev3dev::INPUT_2), "Error: Sensor not connected .*");
+}
+
+TEST_F(USSensorConstructorTest, InvalidOutput) {
+  EXPECT_DEATH(USSensorWrapper(ev3dev::OUTPUT_C, ev3dev::INPUT_1), "Error: Motor not connected .*");
+}
 
 class USSensorTest : public ::testing::Test {};
 

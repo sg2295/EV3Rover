@@ -15,6 +15,7 @@ using LM = ev3dev::large_motor;
 
 MotorsWrapper::MotorsWrapper(ev3dev::address_type l_add, ev3dev::address_type r_add) :
     l_motor{std::make_unique<LM>(l_add)}, r_motor{std::make_unique<LM>(r_add)}, pose{} {
+  Error(l_add != r_add, "Misconfigured motor connections");
   Error(r_motor->connected(), "Right motor not connected");
   Error(l_motor->connected(), "Left motor not connected");
 }

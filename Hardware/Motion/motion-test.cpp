@@ -7,7 +7,12 @@
 
 using namespace motion;
 
-class MotorsConstructorTest : public ::testing::Test {};
+class MotorsConstructorTest : public ::testing::Test {
+ public:
+  MotorsConstructorTest() {
+    ::testing::FLAGS_gtest_death_test_style = "threadsafe";
+  }
+};
 
 TEST_F(MotorsConstructorTest, ValidConnection) {
   MotorsWrapper motors {ev3dev::OUTPUT_A, ev3dev::OUTPUT_B};
@@ -15,19 +20,16 @@ TEST_F(MotorsConstructorTest, ValidConnection) {
 }
 
 TEST_F(MotorsConstructorTest, InvalidConnection) {
-  // TODO: Add
-  // EXPECT_DEATH({ MotorsWrapper{ev3dev::OUTPUT_A, ev3dev::OUTPUT_C}; }, "");
+  EXPECT_DEATH(MotorsWrapper(ev3dev::OUTPUT_A, ev3dev::OUTPUT_C), "Error: Right motor not connected .*");
 }
 
 TEST_F(MotorsConstructorTest, InvalidConnections) {
-  // TODO: Add
-  // EXPECT_DEATH({ MotorsWrapper{ev3dev::OUTPUT_C, ev3dev::OUTPUT_D}; }, "");
+  EXPECT_DEATH(MotorsWrapper(ev3dev::OUTPUT_C, ev3dev::OUTPUT_A), "Error: Left motor not connected .*");
 }
 
 TEST_F(MotorsConstructorTest, DuplicateConnection) {
-  // TODO: Add functionality and test
-  // EXPECT_DEATH({ MotorsWrapper{ev3dev::OUTPUT_A, ev3dev::OUTPUT_A}; }, "");
-  // EXPECT_DEATH({ MotorsWrapper{ev3dev::OUTPUT_C, ev3dev::OUTPUT_C}; }, "");
+  EXPECT_DEATH(MotorsWrapper(ev3dev::OUTPUT_A, ev3dev::OUTPUT_A), "Misconfigured motor connections .*");
+  EXPECT_DEATH(MotorsWrapper(ev3dev::OUTPUT_C, ev3dev::OUTPUT_C), "Misconfigured motor connections .*");
 }
 
 class MotorsTest : public ::testing::Test {

@@ -18,7 +18,7 @@ constexpr char OUTPUT_D[] = "ev3-ports:outD";
 struct common {
   common(address_type addr) {
     // We assume both input/output C are not connected
-    is_connected = addr != OUTPUT_C || addr != INPUT_2;
+    is_connected = addr != OUTPUT_C && addr != INPUT_2;
   }
 
   common& state() { return *this; }
