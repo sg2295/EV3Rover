@@ -39,12 +39,20 @@ execute_process(COMMAND ${CMAKE_COMMAND} -E remove -f ${CMAKE_CURRENT_SOURCE_DIR
 execute_process(COMMAND ${CMAKE_COMMAND} -E create_symlink ${CMAKE_CURRENT_BINARY_DIR}/compile_commands.json
                                                            ${CMAKE_CURRENT_SOURCE_DIR}/compile_commands.json)
 
-option(TESTS "Enable tests. Note this will include a dummy version of the EV3DEV library" OFF)
-if (NOT TESTS)
+option(ENABLE_TESTS "Enable tests. Note this will include a dummy version of the EV3DEV library." OFF)
+if (NOT ENABLE_TESTS)
   # N.B. This project requires the ev3dev-lang-cpp library: https://github.com/ddemidov/ev3dev-lang-cpp.
   find_package(ev3dev REQUIRED)
 else ()
-  add_subdirectory(Tests)
+  add_subdirectory(Test)
+  # Combine all test files into a single monolithic `run-all-tests` target
+  add_custom_command(
+    OUTPUT all-tests
+    COMMAND $<TARGET_FILE:run-motion-test>
+    COMMAND $<TARGET_FILE:run-observation-test>
+    DEPENDS run-motion-test run-observation-test
+  )
+  add_custom_target(run-all-tests DEPENDS all-tests)
 endif ()
 
 add_subdirectory(Report)
@@ -52,5 +60,5 @@ add_subdirectory(Hardware)
 
 add_subdirectory(External/googletest)
 
-add_executable(ev3rover main.cpp)
-target_link_libraries(ev3rover PRIVATE hardware-scope ev3dev hardware report)
+add_executable(run-ev3rover main.cpp)
+target_link_libraries(run-ev3rover PRIVATE hardware-scope ev3dev hardware report)
