@@ -1,4 +1,4 @@
-#include <iostream>
+#include <gtest/gtest.h>
 
 #include "observation.h"
 #include "ev3dev.h"
@@ -7,15 +7,39 @@
 
 using namespace observation;
 
-int main() {
-  Log("Starting observation test\n");
-  USSensorWrapper us_sensor{ev3dev::OUTPUT_C, ev3dev::INPUT_1};
+// TODO: Add invalid connection tests + functionality for debugging
+// class USSensorConstructorTest : public ::testing::Test {};
 
-  auto sensor_readings = us_sensor.scan();
-  for (auto const& bearing : sensor_readings) {
-      for (auto const reading : bearing)
-        std::cout << '[' << reading << "], ";
-    std::cout << std::endl;
+class USSensorTest : public ::testing::Test {};
+
+TEST_F(USSensorTest, Scan) {
+  USSensorWrapper us_sensor{ev3dev::OUTPUT_A, ev3dev::INPUT_1};
+  auto scan = us_sensor.scan();
+  float dist = 0;
+  for (auto bearing : scan) {
+    for (auto entry : bearing) {
+      ++dist;
+      EXPECT_FLOAT_EQ(entry, dist);
+    }
   }
-  return 0;
+}
+
+TEST_F(USSensorTest, DoubleScan) {
+  USSensorWrapper us_sensor{ev3dev::OUTPUT_A, ev3dev::INPUT_1};
+  auto scan1 = us_sensor.scan();
+  float dist = 0;
+  for (auto bearing : scan1) {
+    for (auto entry : bearing) {
+      ++dist;
+      EXPECT_FLOAT_EQ(entry, dist);
+    }
+  }
+  // Notice the second scan is reversed since it's going R -> L
+  auto scan2 = us_sensor.scan();
+  for (size_t i = scan2.size(); i > 0; --i) {
+    for (auto entry : scan2.at(i - 1)) {
+      ++dist;
+      EXPECT_FLOAT_EQ(entry, dist);
+    }
+  }
 }

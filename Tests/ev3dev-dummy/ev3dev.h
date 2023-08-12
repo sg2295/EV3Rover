@@ -35,21 +35,25 @@ struct motor_common {
   motor_common& run_to_abs_pos() { return *this; }
   motor_common& run_to_rel_pos() { return *this; }
 
-  motor_common& set_position_sp(int pos) { (void)pos; return *this; }
+  motor_common& set_position_sp(int npos) { pos += npos; return *this; }
   motor_common& set_speed_sp(int speed) { (void)speed; return *this; }
   motor_common& set_time_sp(int time) { (void)time; return *this; }
 
-  static int position() { return pos; }
+  int position() { return pos; }
 
-  static constexpr int pos = -90;
+  bool change_pos = false;
+  int pos = 0;
 };
 
 struct ultrasonic_sensor : public common {
   ultrasonic_sensor(address_type address) : common{address} {}
 
-  static float distance_centimeters() { return dist; }
+  float distance_centimeters() {
+      ++dist;
+      return dist;
+    }
 
-  static constexpr float dist = 23.9;
+  float dist = 0;
 };
 
 struct large_motor : public common, motor_common {

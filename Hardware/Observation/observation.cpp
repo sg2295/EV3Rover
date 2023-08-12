@@ -47,20 +47,6 @@ SensorReading USSensorWrapper::scan() {
     // Warn(abs(motor->position()) % 15, "Motor position is not correct");
     std::this_thread::sleep_for(std::chrono::milliseconds(10));
   }
-  // TODO: Remove below before tapeout
-  // Unoptimized scan() version:
-  // Reset motor to starting position
-  // motor->set_position_sp(m_start_pos);
-  // motor->set_speed_sp(m_speed).run_to_abs_pos();
-  // while (motor->state().count("running"))
-  //   std::this_thread::sleep_for(std::chrono::milliseconds(10));
-  // // Do scan
-  // for (unsigned i = 0; i < readings.size(); ++i) {
-  //   readings.at(i) = bearing_reading();  // us_sensor->distance_centimeters();
-  //   // Log("Reading done at: ", motor->position(), "\n");
-  //   if (i + 1 < readings.size()) rotate(false);
-  //   std::this_thread::sleep_for(std::chrono::milliseconds(10));
-  // }
   Warn(abs(motor->position()) == abs(m_start_pos), "Motor position after scan invalid.");
   return readings;
 }
